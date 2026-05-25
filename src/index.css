@@ -117,6 +117,17 @@ body {
 }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 
+.hero-bg {
+  background-size: cover;
+  background-position: center center;
+}
+@media (min-width: 768px) {
+  .hero-bg {
+    background-size: 75%;
+    background-position: center right;
+  }
+}
+
 .section-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.35), transparent);

@@ -40,11 +40,10 @@ export default function Hero() {
       {/* Parallax background */}
       <motion.div className="absolute inset-0 w-full h-[120%] -top-[10%]" style={{ y: bgY }}>
         <div
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full hero-bg"
           style={{
             backgroundImage: `url('${HERO.image}')`,
-            backgroundSize: '75%', // Diminui o tamanho da imagem (ajuste a % se precisar)
-            backgroundPosition: 'center right', // Ajusta a posição
+            backgroundPosition: 'center right',
             backgroundRepeat: 'no-repeat',
             transform: `translate(${mousePos.x * -8}px, ${mousePos.y * -5}px)`,
             transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)',
