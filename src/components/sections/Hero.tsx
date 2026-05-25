@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import GoldParticles from '../ui/GoldParticles';
-import { HERO } from '../../data/siteConfig';
+import { HERO, waUrl } from '../../data/siteConfig';
 
 // SVG icon paths reutilizáveis por index de stat
 const STAT_ICONS = [
@@ -35,7 +35,7 @@ export default function Hero() {
       id="home"
       ref={containerRef}
       className="relative w-full overflow-hidden"
-      style={{ height: '100svh', minHeight: '680px' }}
+      style={{ height: '100svh', minHeight: '560px' }}
     >
       {/* Parallax background */}
       <motion.div className="absolute inset-0 w-full h-[120%] -top-[10%]" style={{ y: bgY }}>
@@ -43,8 +43,9 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full"
           style={{
             backgroundImage: `url('${HERO.image}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center 30%',
+            backgroundSize: '75%', // Diminui o tamanho da imagem (ajuste a % se precisar)
+            backgroundPosition: 'center right', // Ajusta a posição
+            backgroundRepeat: 'no-repeat',
             transform: `translate(${mousePos.x * -8}px, ${mousePos.y * -5}px)`,
             transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)',
             willChange: 'transform',
@@ -64,7 +65,7 @@ export default function Hero() {
 
       {/* Content */}
       <motion.div
-        className="absolute inset-0 z-30 flex flex-col justify-center items-start px-6 md:px-12 lg:px-16"
+        className="absolute inset-0 z-30 flex flex-col justify-center items-start px-5 sm:px-8 md:px-12 lg:px-16"
         style={{ y: textY, opacity }}
       >
         <div className="max-w-[860px]">
@@ -85,7 +86,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: [0.16,1,0.3,1] }}
             className="cinematic-title mb-5"
-            style={{ fontSize: 'clamp(2.8rem,7vw,6.5rem)', lineHeight: '0.93', color: 'var(--text-primary)' }}
+            style={{ fontSize: 'clamp(1.7rem,5vw,5.0rem)', lineHeight: '1.0', color: 'var(--text-primary)' }}
           >
             {HERO.title[0]}
             <br /><span className="gold-shimmer">{HERO.title[1]}</span>
@@ -101,7 +102,7 @@ export default function Hero() {
             className="mb-10 max-w-[540px]"
             style={{
               fontFamily: "'Cormorant Garamond',serif",
-              fontSize: 'clamp(1rem,1.8vw,1.25rem)',
+              fontSize: 'clamp(0.9rem,1.8vw,1.25rem)',
               color: 'rgba(245,240,232,0.68)',
               lineHeight: '1.65',
               fontStyle: 'italic',
@@ -120,17 +121,17 @@ export default function Hero() {
           >
             <motion.button
               className="btn-gold flex items-center gap-3"
-              style={{ borderRadius: '2px', fontSize: '0.76rem' }}
+              style={{ borderRadius: '2px', fontSize: '0.82rem', padding: '13px 22px' }}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              onClick={() => document.querySelector('#cursos')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => window.open(waUrl('Olá! Vim através do site JJ Bar & Barista Academy e gostaria de começar minha jornada na plataforma.'), '_blank', 'noopener,noreferrer')}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
               {HERO.cta_primary}
             </motion.button>
             <motion.button
               className="btn-outline-gold flex items-center gap-3"
-              style={{ borderRadius: '2px', fontSize: '0.76rem' }}
+              style={{ borderRadius: '2px', fontSize: '0.82rem', padding: '13px 22px' }}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               onClick={() => document.querySelector('#carousel')?.scrollIntoView({ behavior: 'smooth' })}
@@ -169,7 +170,7 @@ export default function Hero() {
                   <div className="gold-text font-bold" style={{ fontSize: 'clamp(1rem,1.5vw,1.2rem)', fontFamily:"'Bebas Neue',sans-serif", letterSpacing:'0.05em' }}>
                     {s.value}
                   </div>
-                  <div style={{ color:'var(--text-muted)', fontSize:'0.58rem', textTransform:'uppercase', letterSpacing:'0.12em' }}>
+                  <div style={{ color:'var(--text-muted)', fontSize:'0.65rem', textTransform:'uppercase', letterSpacing:'0.12em' }}>
                     {s.label}
                   </div>
                 </div>

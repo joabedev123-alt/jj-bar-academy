@@ -62,9 +62,32 @@ export default function App() {
       {/* Main content */}
       <main>
         <Hero />
+
+        {/* Section separator */}
+        <div style={{ height: '1cm', background: 'var(--bg-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ height: '1px', width: '60%', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)' }} />
+        </div>
+
         <CourseCarousel />
+
+        {/* Section separator */}
+        <div style={{ height: '1cm', background: 'var(--bg-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ height: '1px', width: '60%', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)' }} />
+        </div>
+
         <CourseSection />
+
+        {/* Section separator */}
+        <div style={{ height: '1cm', background: 'var(--bg-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ height: '1px', width: '60%', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)' }} />
+        </div>
+
         <StatsSection />
+
+        {/* Section separator */}
+        <div style={{ height: '2cm', background: 'var(--bg-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ height: '1px', width: '60%', background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent)' }} />
+        </div>
       </main>
 
       {/* Footer */}

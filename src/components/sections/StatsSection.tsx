@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { STATS, STATS_SECTION, TESTIMONIALS } from '../../data/siteConfig';
+import { STATS, STATS_SECTION, TESTIMONIALS, waUrl } from '../../data/siteConfig';
 
 // SVG icon paths na mesma ordem de STATS
 const STAT_ICONS = [
@@ -35,7 +35,7 @@ export default function StatsSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} className="relative py-20 md:py-28 overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
+    <section ref={ref} className="relative py-16 md:py-24 overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
       {/* Big watermark */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
         <span
@@ -46,25 +46,25 @@ export default function StatsSection() {
         </span>
       </div>
 
-      <div className="max-w-[1160px] mx-auto px-5 md:px-8 relative z-10">
+      <div className="max-w-[1600px] mx-auto px-5 md:px-10 relative z-10">
 
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-14"
+          className="text-center mb-20"
         >
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="h-px w-14" style={{ background: 'linear-gradient(to right,transparent,var(--gold-primary))' }} />
-            <span style={{ color:'var(--gold-primary)', fontSize:'0.64rem', letterSpacing:'0.22em', textTransform:'uppercase' }}>
+            <span style={{ color:'var(--gold-primary)', fontSize:'0.8rem', letterSpacing:'0.25em', textTransform:'uppercase', fontWeight: 'bold' }}>
               {STATS_SECTION.eyebrow}
             </span>
             <div className="h-px w-14" style={{ background: 'linear-gradient(to left,transparent,var(--gold-primary))' }} />
           </div>
           <h2
             className="cinematic-title"
-            style={{ fontSize: 'clamp(1.9rem,4vw,3.2rem)', color: 'var(--text-primary)', lineHeight: 1.05 }}
+            style={{ fontSize: 'clamp(1.8rem,4vw,3.2rem)', color: 'var(--text-primary)', lineHeight: 1.05 }}
           >
             {STATS_SECTION.title} <span className="gold-text">{STATS_SECTION.titleGold}</span>
             <br />
@@ -74,8 +74,8 @@ export default function StatsSection() {
 
         {/* Stats grid */}
         <div
-          className="grid grid-cols-2 md:grid-cols-3 mb-16 md:mb-20 rounded-sm overflow-hidden"
-          style={{ border: '1px solid rgba(201,168,76,0.08)' }}
+          className="grid grid-cols-2 md:grid-cols-3 rounded-sm overflow-hidden"
+          style={{ marginBottom: '2cm', border: '1px solid rgba(201,168,76,0.08)' }}
         >
           {STATS.map((stat, i) => (
             <motion.div
@@ -83,7 +83,7 @@ export default function StatsSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.09, duration: 0.7 }}
-              className="relative p-7 md:p-9 text-center group cursor-default"
+              className="relative p-4 sm:p-6 md:p-9 text-center group cursor-default"
               style={{
                 background: 'rgba(255,255,255,0.02)',
                 borderRight: (i + 1) % 3 !== 0 ? '1px solid rgba(201,168,76,0.06)' : 'none',
@@ -101,29 +101,39 @@ export default function StatsSection() {
               </div>
               <div
                 className="gold-shimmer font-bold mb-1"
-                style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:'clamp(2rem,3.5vw,2.8rem)', letterSpacing:'0.03em', lineHeight:1 }}
+                style={{ fontFamily:"'Bebas Neue',sans-serif", fontSize:'clamp(1.6rem,3.5vw,2.8rem)', letterSpacing:'0.03em', lineHeight:1 }}
               >
                 <AnimatedNumber target={stat.value} suffix={stat.suffix} inView={isInView} />
               </div>
-              <div style={{ color:'var(--text-muted)', fontSize:'0.6rem', letterSpacing:'0.15em', textTransform:'uppercase' }}>
+              <div style={{ color:'var(--text-muted)', fontSize:'0.68rem', letterSpacing:'0.12em', textTransform:'uppercase' }}>
                 {stat.label}
               </div>
             </motion.div>
           ))}
         </div>
 
+        {/* Divisor visual com bastante espaçamento vertical */}
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="w-full flex justify-center my-14 md:my-20"
+        >
+          <div className="h-px w-[80%] max-w-2xl" style={{ background: 'linear-gradient(90deg, transparent, rgba(201,168,76,0.35), transparent)' }} />
+        </motion.div>
+
         {/* Testimonials */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.35, duration: 0.7 }}
-          className="text-center mb-8"
+          className="text-center mb-10 md:mb-12"
           style={{ color:'var(--text-muted)', fontSize:'0.64rem', letterSpacing:'0.2em', textTransform:'uppercase' }}
         >
           — O que dizem nossos alunos —
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
           {TESTIMONIALS.map((t, i) => (
             <motion.div
               key={t.name}
@@ -175,8 +185,9 @@ export default function StatsSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.75, duration: 0.8 }}
-          className="mt-16 md:mt-20 relative overflow-hidden rounded-sm text-center p-10 md:p-14"
+          className="relative overflow-hidden rounded-sm text-center p-10 md:p-14"
           style={{
+            marginTop: '2cm',
             background: 'linear-gradient(135deg,rgba(201,168,76,0.07) 0%,rgba(139,105,20,0.04) 50%,rgba(201,168,76,0.07) 100%)',
             border: '1px solid rgba(201,168,76,0.22)',
           }}
@@ -194,8 +205,8 @@ export default function StatsSection() {
             {STATS_SECTION.cta_title} <span className="gold-text">{STATS_SECTION.cta_titleGold}</span>
           </h3>
           <p
-            className="mb-8 max-w-md mx-auto"
-            style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'1rem', color:'rgba(245,240,232,0.48)', fontStyle:'italic', fontWeight:300, lineHeight:1.65 }}
+            className="mb-8"
+            style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:'1rem', color:'rgba(245,240,232,0.48)', fontStyle:'italic', fontWeight:300, lineHeight:1.65, textAlign:'center', width:'100%' }}
           >
             {STATS_SECTION.cta_sub}
           </p>
@@ -204,7 +215,7 @@ export default function StatsSection() {
             style={{ borderRadius:'2px', fontSize:'0.78rem' }}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => document.querySelector('#cursos')?.scrollIntoView({ behavior:'smooth' })}
+            onClick={() => window.open(waUrl('Olá! Vim através do site JJ Bar & Barista Academy e quero acessar a plataforma e começar minha transformação.'), '_blank', 'noopener,noreferrer')}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
             {STATS_SECTION.cta_label}

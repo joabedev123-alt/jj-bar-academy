@@ -4,10 +4,15 @@
 // ============================================================
 
 // ── CONTATO ─────────────────────────────────────────────────
-export const WHATSAPP_NUMBER = '5511999999999'   // ex: 5511987654321
-export const WHATSAPP_MESSAGE = 'Olá! Tenho interesse nos cursos da JJ Bar & Barista Academy. Poderia me passar mais informações?'
-export const EMAIL = 'contato@jjbarbarista.com.br'
-export const PHONE_DISPLAY = '(11) 99999-9999'
+export const WHATSAPP_NUMBER = '5511982911648'
+export const WHATSAPP_MESSAGE = 'Olá! Vim através do site JJ Bar & Barista Academy e gostaria de mais informações.'
+
+export function waUrl(msg: string) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`
+}
+export const EMAIL = 'atendimento@jjbarebaristaacademy.com'
+export const WEBSITE = 'www.jjbarebaristaacademy.com'
+export const PHONE_DISPLAY = '+55 11 98291-1648'
 
 // ── MARCA ────────────────────────────────────────────────────
 export const BRAND = {
@@ -18,8 +23,9 @@ export const BRAND = {
 
 // ── REDES SOCIAIS ────────────────────────────────────────────
 export const SOCIAL = {
-  youtube:   'https://youtube.com/@jjbarbarista',
-  instagram: 'https://instagram.com/jjbarbarista',
+  youtube:   'https://youtube.com/@jjbarebarista?si=uFC_dwoTcG6_zu0C',
+  instagram:        'https://instagram.com/jjbarebaristastore_academy',
+  instagramFelipe:  'https://instagram.com/felipemartins.barebarista',
   whatsapp:  `https://wa.me/${WHATSAPP_NUMBER}`,
   tiktok:    'https://tiktok.com/@jjbarbarista',
 }
@@ -48,7 +54,7 @@ export const HERO = {
   cta_primary:   'QUERO COMEÇAR',
   cta_secondary: 'VER CURSOS',
   // URL da imagem de fundo do hero (Unsplash ou upload próprio)
-  image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1920&q=85&auto=format',
+  image: '/felipe1.png',
   stats: [
     { value: '12+',  label: 'Cursos Premium' },
     { value: '15K+', label: 'Alunos Formados' },
@@ -86,7 +92,7 @@ export const STATS = [
   { value: 98,    suffix: '%',  label: 'Taxa de Satisfação' },
   { value: 12,    suffix: '+',  label: 'Cursos Premium' },
   { value: 8,     suffix: '+',  label: 'Anos de Experiência' },
-  { value: 60,    suffix: 'h+', label: 'Horas de Conteúdo' },
+  { value: 100,   suffix: 'h+', label: 'Horas de Conteúdo' },
   { value: 4,     suffix: 'K+', label: 'Membros VIP' },
 ]
 
@@ -105,24 +111,24 @@ export const STATS_SECTION = {
 // ── DEPOIMENTOS ──────────────────────────────────────────────
 export const TESTIMONIALS = [
   {
-    name:   'Rafael Mendes',
-    role:   'Bartender Profissional',
-    text:   'O curso transformou minha carreira completamente. Em 6 meses triplicei minha renda.',
-    avatar: 'RM',
+    name:   'Monique',
+    role:   'Noiva e Empresária',
+    text:   'Vocês arrasaram no meu casamento, sério, foi inesquecível, já quero fazer os cursos de vocês pra me tornar uma Bartender. Ou será uma empreendedora, pode? Hahaha. Oremos, ansiosa para começar.',
+    avatar: 'MO',
     stars:  5,
   },
   {
-    name:   'Camila Torres',
-    role:   'Proprietária de Cafeteria',
-    text:   'Aprendi tudo que precisava para abrir meu próprio negócio. Hoje faturamos 5 dígitos.',
-    avatar: 'CT',
+    name:   'Guilherme',
+    role:   'Bartender',
+    text:   'Fiz o curso presencial com o Felipe, com o Bob e o Ensei, valeu galera, primeiro curso da minha carreira e já foi uma atitude positiva na minha vida colocando em prática todos os aprendizados. Obrigado mestres!!!',
+    avatar: 'GU',
     stars:  5,
   },
   {
-    name:   'Lucas Ferreira',
-    role:   'Barista Campeão Regional',
-    text:   'As técnicas de latte art me levaram a ganhar competições estaduais. Conteúdo de elite.',
-    avatar: 'LF',
+    name:   'Vitor',
+    role:   'Empresário de Eventos e Cafeteria',
+    text:   'Trabalhei na JJ depois montei meu próprio negócio. A JJ foi uma escola pra mim, cada evento, cada aprendizado, levo isso pra minha vida, além de valores, aprendi a ser um empreendedor na prática mesmo.',
+    avatar: 'VI',
     stars:  5,
   },
 ]
@@ -130,9 +136,9 @@ export const TESTIMONIALS = [
 // ── STRIP DE BENEFÍCIOS (embaixo do carrossel) ────────────────
 export const BENEFITS_STRIP = [
   { value: '12+',        label: 'Módulos Premium' },
-  { value: '60h+',       label: 'Conteúdo em Vídeo' },
-  { value: 'Acesso',     label: 'Vitalício' },
-  { value: 'Certificado',label: 'Incluso' },
+  { value: '15K',        label: 'Alunos formados' },
+  { value: '99%',        label: 'de satisfação' },
+  { value: '+20',        label: 'anos de experiencia' },
 ]
 
 // ── FOOTER ───────────────────────────────────────────────────
@@ -163,7 +169,8 @@ export const FOOTER_LINKS = [
     links: [
       { label: 'Grupo VIP Gratuito', href: '#vip' },
       { label: 'Canal YouTube',      href: SOCIAL.youtube },
-      { label: 'Instagram',          href: SOCIAL.instagram },
+      { label: 'Instagram Oficial',   href: SOCIAL.instagram },
+      { label: 'Instagram Felipe',    href: SOCIAL.instagramFelipe },
       { label: 'WhatsApp VIP',       href: SOCIAL.whatsapp },
     ],
   },

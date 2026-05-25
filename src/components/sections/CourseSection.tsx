@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { courses } from '../../data/courses';
+import { waUrl } from '../../data/siteConfig';
 
 function CourseCard({ course, index }: { course: typeof courses[0]; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -27,7 +28,7 @@ function CourseCard({ course, index }: { course: typeof courses[0]; index: numbe
         background: 'var(--bg-card)',
         border: '1px solid rgba(255,255,255,0.04)',
         borderRadius: '4px',
-        minHeight: '480px',
+        minHeight: 'clamp(320px, 50vw, 480px)',
       }}
       whileHover={{
         borderColor: `${course.accentColor}40`,
@@ -37,7 +38,7 @@ function CourseCard({ course, index }: { course: typeof courses[0]; index: numbe
       {/* Layout: alternating left/right image */}
       <div className={`flex flex-col lg:flex-row ${!isEven ? 'lg:flex-row-reverse' : ''} h-full`}>
         {/* Image side */}
-        <div className="relative lg:w-[52%] overflow-hidden" style={{ minHeight: '300px' }}>
+        <div className="relative lg:w-[52%] overflow-hidden" style={{ minHeight: 'clamp(200px, 35vw, 300px)' }}>
           <motion.img
             src={course.image}
             alt={course.title}
@@ -68,7 +69,7 @@ function CourseCard({ course, index }: { course: typeof courses[0]; index: numbe
             className="absolute top-6 left-6 font-bold"
             style={{
               fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: '3.5rem',
+              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
               color: `${course.accentColor}25`,
               letterSpacing: '-0.02em',
               lineHeight: 1,
@@ -94,7 +95,7 @@ function CourseCard({ course, index }: { course: typeof courses[0]; index: numbe
         </div>
 
         {/* Content side */}
-        <div className="lg:w-[48%] p-8 lg:p-10 flex flex-col justify-center">
+        <div className="lg:w-[48%] p-5 sm:p-7 lg:p-10 flex flex-col justify-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -220,6 +221,7 @@ function CourseCard({ course, index }: { course: typeof courses[0]; index: numbe
               x: 2,
             }}
             whileTap={{ scale: 0.97 }}
+            onClick={() => window.open(waUrl(`Olá! Tenho interesse no curso "${course.title}" da JJ Bar & Barista Academy. Gostaria de mais informações.`), '_blank', 'noopener,noreferrer')}
           >
             {course.ctaLabel || 'ACESSAR CURSO'}
             <motion.span
@@ -254,42 +256,38 @@ export default function CourseSection() {
   const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
   return (
-    <section id="cursos" ref={sectionRef} className="relative py-24" style={{ background: 'var(--bg-secondary)' }}>
-      {/* Top divider */}
-      <div className="section-divider" />
-
+    <section id="cursos" ref={sectionRef} className="relative py-16 md:py-24" style={{ background: 'var(--bg-secondary)' }}>
       {/* Ambient bg glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{ background: 'radial-gradient(circle, rgba(201,168,76,0.03) 0%, transparent 70%)' }}
       />
 
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-10">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-24"
         >
-          <div className="flex items-center justify-center gap-4 mb-4">
+          <div className="flex items-center justify-center gap-4 mb-5">
             <div className="h-px w-16" style={{ background: 'linear-gradient(to right, transparent, var(--gold-primary))' }} />
             <span
-              className="uppercase tracking-widest text-xs"
-              style={{ color: 'var(--gold-primary)', letterSpacing: '0.22em', fontSize: '0.65rem' }}
+              className="uppercase tracking-widest font-bold"
+              style={{ color: 'var(--gold-primary)', letterSpacing: '0.25em', fontSize: '0.8rem' }}
             >
               Currículo Completo
             </span>
             <div className="h-px w-16" style={{ background: 'linear-gradient(to left, transparent, var(--gold-primary))' }} />
           </div>
           <h2
-            className="cinematic-title mb-4"
-            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)' }}
+            className="cinematic-title mb-6"
+            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}
           >
             <span className="gold-text">TODOS OS CURSOS</span>
           </h2>
           <p
-            className="max-w-lg mx-auto"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: '1.1rem',
@@ -297,6 +295,8 @@ export default function CourseSection() {
               fontStyle: 'italic',
               fontWeight: 300,
               lineHeight: 1.7,
+              textAlign: 'center',
+              width: '100%',
             }}
           >
             Uma plataforma completa para dominar cada faceta do universo

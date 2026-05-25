@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { NAV_LINKS, NAV_CTA, BRAND } from '../../data/siteConfig';
+import { NAV_LINKS, NAV_CTA, BRAND, waUrl } from '../../data/siteConfig';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -65,7 +65,7 @@ export default function Navbar() {
               <div className="gold-text font-bold" style={{ fontFamily:"'Bebas Neue',sans-serif", letterSpacing:'0.14em', fontSize:'1.05rem' }}>
                 {BRAND.name}
               </div>
-              <div style={{ color:'var(--text-muted)', letterSpacing:'0.22em', fontSize:'0.5rem', textTransform:'uppercase' }}>
+              <div style={{ color:'var(--text-muted)', letterSpacing:'0.18em', fontSize:'0.6rem', textTransform:'uppercase' }}>
                 {BRAND.tagline}
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function Navbar() {
               style={{ borderRadius: '2px', fontSize: '0.72rem', padding: '11px 24px' }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              onClick={() => handleNav('#cursos', 'Cursos')}
+              onClick={() => window.open(waUrl('Olá! Vim através do site JJ Bar & Barista Academy e gostaria de conhecer a plataforma.'), '_blank', 'noopener,noreferrer')}
             >
               {NAV_CTA}
             </motion.button>
@@ -145,7 +145,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col pt-20 pb-8 px-8 overflow-y-auto"
+            className="fixed inset-0 z-40 flex flex-col pt-16 pb-8 px-6 overflow-y-auto"
             style={{ background: 'rgba(8,8,8,0.97)', backdropFilter: 'blur(30px)' }}
           >
             <div className="section-divider mb-6" />
@@ -166,7 +166,7 @@ export default function Navbar() {
                   fontWeight: 500,
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  fontSize: '0.85rem',
+                  fontSize: '0.92rem',
                 }}
               >
                 {link.label}
@@ -178,7 +178,7 @@ export default function Navbar() {
               transition={{ delay: 0.55 }}
               className="btn-gold mt-8 w-full"
               style={{ borderRadius: '2px' }}
-              onClick={() => handleNav('#cursos', 'Cursos')}
+              onClick={() => window.open(waUrl('Olá! Vim através do site JJ Bar & Barista Academy e gostaria de conhecer a plataforma.'), '_blank', 'noopener,noreferrer')}
             >
               {NAV_CTA}
             </motion.button>
