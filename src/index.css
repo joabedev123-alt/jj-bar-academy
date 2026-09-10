@@ -210,3 +210,12 @@ body {
 .course-card:hover::after {
   border-color: rgba(201, 168, 76, 0.4);
 }
+
+@media (max-width: 768px) {
+  * {
+    cursor: auto !important;
+  }
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

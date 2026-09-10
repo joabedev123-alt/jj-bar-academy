@@ -43,23 +43,17 @@ function CarouselCard({ course, index }: { course: typeof courses[0]; index: num
           : '0 4px 16px rgba(0,0,0,0.3)',
       }}
     >
-      {/* Image — clean, no overlays */}
-      <div className="relative overflow-hidden" style={{ aspectRatio: '16/10', borderRadius: '4px 4px 0 0' }}>
+      {/* Image — Proporção exata 3:2, nítida e sem overlays */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: '3/2', borderRadius: '4px 4px 0 0' }}>
         <img
           src={course.image}
           alt={course.title}
           className="w-full h-full object-cover"
           style={{
-            transform: hovered ? 'scale(1.1)' : 'scale(1)',
-            transition: 'transform 0.55s cubic-bezier(0.16,1,0.3,1)',
-            filter: hovered ? 'brightness(0.75)' : 'brightness(0.6)',
+            transform: hovered ? 'scale(1.04)' : 'scale(1)',
+            transition: 'transform 0.5s cubic-bezier(0.16,1,0.3,1)',
           }}
           loading="lazy"
-        />
-        {/* Bottom fade only — no icons or badges on top */}
-        <div
-          className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, transparent 40%, rgba(8,8,8,0.88) 100%)' }}
         />
       </div>
 

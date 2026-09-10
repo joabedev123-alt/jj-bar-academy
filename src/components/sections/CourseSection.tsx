@@ -36,66 +36,23 @@ function CourseCard({ course, index }: { course: typeof courses[0]; index: numbe
       }}
     >
       {/* Layout: alternating left/right image */}
-      <div className={`flex flex-col lg:flex-row ${!isEven ? 'lg:flex-row-reverse' : ''} h-full`}>
-        {/* Image side */}
-        <div className="relative lg:w-[52%] overflow-hidden" style={{ minHeight: 'clamp(200px, 35vw, 300px)' }}>
-          <motion.img
-            src={course.image}
-            alt={course.title}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ filter: 'brightness(0.55)' }}
-            whileHover={{ scale: 1.04, filter: 'brightness(0.7)' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            loading="lazy"
-          />
-          {/* Color overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: isEven
-                ? `linear-gradient(to right, transparent 40%, var(--bg-card) 100%), linear-gradient(to bottom, transparent 50%, var(--bg-card) 100%)`
-                : `linear-gradient(to left, transparent 40%, var(--bg-card) 100%), linear-gradient(to bottom, transparent 50%, var(--bg-card) 100%)`,
-            }}
-          />
-          {/* Accent glow on image */}
-          <div
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{
-              background: `radial-gradient(circle at ${isEven ? '80%' : '20%'} 50%, ${course.accentColor}15 0%, transparent 60%)`,
-            }}
-          />
-          {/* Course number */}
-          <div
-            className="absolute top-6 left-6 font-bold"
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              color: `${course.accentColor}25`,
-              letterSpacing: '-0.02em',
-              lineHeight: 1,
-            }}
-          >
-            {String(index + 1).padStart(2, '0')}
-          </div>
-          {/* Category badge */}
-          <div className="absolute bottom-6 left-6">
-            <span
-              className="px-3 py-1 rounded-sm text-xs uppercase tracking-widest font-semibold"
-              style={{
-                background: `${course.accentColor}18`,
-                border: `1px solid ${course.accentColor}45`,
-                color: course.accentColor,
-                fontSize: '0.6rem',
-                letterSpacing: '0.15em',
-              }}
-            >
-              {course.category}
-            </span>
+      <div className={`flex flex-col lg:flex-row ${!isEven ? 'lg:flex-row-reverse' : ''} items-center`}>
+        {/* Image side — Proporção exata 3:2 (1536x1024) sem cortes, sem bordas extras e sem overlays */}
+        <div className="w-full lg:w-[48%] relative flex items-center justify-center bg-black/40 overflow-hidden">
+          <div className="w-full aspect-[3/2] overflow-hidden">
+            <motion.img
+              src={course.image}
+              alt={course.title}
+              className="w-full h-full object-cover"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              loading="lazy"
+            />
           </div>
         </div>
 
         {/* Content side */}
-        <div className="lg:w-[48%] p-5 sm:p-7 lg:p-10 flex flex-col justify-center">
+        <div className="w-full lg:w-[52%] p-5 sm:p-7 lg:p-10 flex flex-col justify-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -202,7 +159,7 @@ function CourseCard({ course, index }: { course: typeof courses[0]; index: numbe
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.7, duration: 0.6 }}
-            className="flex items-center gap-3 group/btn cursor-pointer w-fit"
+            className="flex items-center justify-center gap-3 group/btn cursor-pointer w-full sm:w-fit"
             style={{
               background: `${course.accentColor}15`,
               border: `1px solid ${course.accentColor}50`,
@@ -269,21 +226,21 @@ export default function CourseSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-24"
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="flex items-center justify-center gap-4 mb-5">
-            <div className="h-px w-16" style={{ background: 'linear-gradient(to right, transparent, var(--gold-primary))' }} />
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="h-px w-14" style={{ background: 'linear-gradient(to right, transparent, var(--gold-primary))' }} />
             <span
               className="uppercase tracking-widest font-bold"
-              style={{ color: 'var(--gold-primary)', letterSpacing: '0.25em', fontSize: '0.8rem' }}
+              style={{ color: 'var(--gold-primary)', letterSpacing: '0.22em', fontSize: '0.85rem' }}
             >
               Currículo Completo
             </span>
-            <div className="h-px w-16" style={{ background: 'linear-gradient(to left, transparent, var(--gold-primary))' }} />
+            <div className="h-px w-14" style={{ background: 'linear-gradient(to left, transparent, var(--gold-primary))' }} />
           </div>
           <h2
-            className="cinematic-title mb-6"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)' }}
+            className="cinematic-title mb-4"
+            style={{ fontSize: 'clamp(2.2rem, 5vw, 3.8rem)', letterSpacing: '0.04em' }}
           >
             <span className="gold-text">TODOS OS CURSOS</span>
           </h2>

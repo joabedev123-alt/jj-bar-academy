@@ -14,10 +14,18 @@ const STAT_ICONS = [
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollY } = useScroll();
   const bgY = useTransform(scrollY, [0, 800], ['0%', '25%']);
   const textY = useTransform(scrollY, [0, 600], ['0%', '15%']);
   const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
@@ -34,16 +42,38 @@ export default function Hero() {
     <section
       id="home"
       ref={containerRef}
-      className="relative w-full overflow-hidden"
-      style={{ height: '100svh', minHeight: '560px' }}
+      className="relative w-full overflow-hidden min-h-[100svh] h-auto md:h-[100svh]"
+      style={{ minHeight: '560px' }}
     >
-      {/* Parallax background */}
-      <motion.div className="absolute inset-0 w-full h-[120%] -top-[10%]" style={{ y: bgY }}>
+      {/* Mobile Hero Image (fica no topo, inteira e sem texto em cima) */}
+      <div
+        className="block md:hidden w-full relative z-20"
+        style={{ paddingTop: 'calc(68px + 1cm)' }}
+      >
+        <div className="relative w-full aspect-[1672/941] overflow-hidden">
+          <img
+            src={HERO.image}
+            alt="JJ Bar & Barista Academy"
+            className="w-full h-full object-cover"
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: 'linear-gradient(to bottom, transparent 0%, transparent 60%, rgba(8,8,8,0.7) 85%, #080808 100%)',
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Desktop Parallax background */}
+      <motion.div
+        className="hidden md:block absolute inset-0 w-full h-[120%] -top-[10%]"
+        style={{ y: bgY }}
+      >
         <div
           className="absolute inset-0 w-full h-full hero-bg"
           style={{
             backgroundImage: `url('${HERO.image}')`,
-            backgroundPosition: 'center right',
             backgroundRepeat: 'no-repeat',
             transform: `translate(${mousePos.x * -8}px, ${mousePos.y * -5}px)`,
             transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)',
@@ -52,20 +82,20 @@ export default function Hero() {
         />
       </motion.div>
 
-      {/* Overlays */}
-      <div className="cinematic-overlay absolute inset-0 z-10" />
-      <div className="absolute inset-0 z-10" style={{ background: 'radial-gradient(ellipse at center bottom, rgba(201,168,76,0.06) 0%, transparent 65%)' }} />
-      <div className="absolute inset-0 z-10" style={{ background: 'linear-gradient(90deg, rgba(8,8,8,0.6) 0%, transparent 50%, rgba(8,8,8,0.4) 100%)' }} />
+      {/* Desktop Overlays */}
+      <div className="hidden md:block cinematic-overlay absolute inset-0 z-10" />
+      <div className="hidden md:block absolute inset-0 z-10" style={{ background: 'radial-gradient(ellipse at center bottom, rgba(201,168,76,0.06) 0%, transparent 65%)' }} />
+      <div className="hidden md:block absolute inset-0 z-10" style={{ background: 'linear-gradient(90deg, rgba(8,8,8,0.6) 0%, transparent 50%, rgba(8,8,8,0.4) 100%)' }} />
 
       {/* Particles */}
-      <div className="absolute inset-0 z-20">
+      <div className="absolute inset-0 z-20 pointer-events-none">
         <GoldParticles count={50} />
       </div>
 
-      {/* Content */}
+      {/* Content (no mobile flui naturalmente abaixo da imagem na área escura) */}
       <motion.div
-        className="absolute inset-0 z-30 flex flex-col justify-center items-start px-5 sm:px-8 md:px-12 lg:px-16"
-        style={{ y: textY, opacity }}
+        className="relative md:absolute md:inset-0 z-30 flex flex-col justify-start md:justify-center items-start px-5 sm:px-8 md:px-12 lg:px-16 pt-3 md:pt-0 pb-16 md:pb-0"
+        style={{ y: isMobile ? 0 : textY, opacity: isMobile ? 1 : opacity }}
       >
         <div className="max-w-[860px]">
           {/* Top badge */}
@@ -73,7 +103,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="flex items-center gap-3 mb-8"
+            className="flex items-center gap-3 mb-5 md:mb-8"
           >
             <div className="premium-badge">{HERO.badge}</div>
             <div className="h-px flex-1 max-w-[80px]" style={{ background: 'rgba(201,168,76,0.5)' }} />
@@ -184,7 +214,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-2"
+        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex-col items-center gap-2"
       >
         <span style={{ color:'var(--text-muted)', fontSize:'0.52rem', letterSpacing:'0.25em', textTransform:'uppercase' }}>SCROLL</span>
         <motion.div

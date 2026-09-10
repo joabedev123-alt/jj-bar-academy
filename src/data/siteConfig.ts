@@ -59,7 +59,7 @@ export const HERO = {
     { value: '12+',  label: 'Cursos Premium' },
     { value: '15K+', label: 'Alunos Formados' },
     { value: '98%',  label: 'Satisfação' },
-    { value: '8+',   label: 'Anos de Experiência' },
+    { value: '+20',  label: 'Anos de Experiência' },
   ],
 }
 
@@ -91,7 +91,7 @@ export const STATS = [
   { value: 15000, suffix: '+',  label: 'Alunos Formados' },
   { value: 98,    suffix: '%',  label: 'Taxa de Satisfação' },
   { value: 12,    suffix: '+',  label: 'Cursos Premium' },
-  { value: 8,     suffix: '+',  label: 'Anos de Experiência' },
+  { value: 20,    suffix: '+',  label: 'Anos de Experiência' },
   { value: 100,   suffix: 'h+', label: 'Horas de Conteúdo' },
   { value: 4,     suffix: 'K+', label: 'Membros VIP' },
 ]

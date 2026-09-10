@@ -64,7 +64,7 @@ export default function CursorGlow() {
     <>
       <div
         ref={dotRef}
-        className="fixed pointer-events-none z-[99999]"
+        className="hidden md:block fixed pointer-events-none z-[99999]"
         style={{
           width: '6px',
           height: '6px',
@@ -77,7 +77,7 @@ export default function CursorGlow() {
       />
       <div
         ref={ringRef}
-        className="fixed pointer-events-none z-[99998]"
+        className="hidden md:block fixed pointer-events-none z-[99998]"
         style={{
           width: '32px',
           height: '32px',
